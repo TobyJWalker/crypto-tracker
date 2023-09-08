@@ -30,4 +30,11 @@ def get_crypto_data():
     parsed_data = json.loads(response.text)
     return parsed_data['data']
 
-def get_data_by_symbol(symbol)
+# get the information of a currency by its symbol as a dictionary
+def get_data_by_symbol(symbol, data):
+
+    # loop through data and return the data entry which matches the requested symbol
+    for entry in data:
+        if entry['symbol'] == 'symbol':
+            return entry
+    return None
