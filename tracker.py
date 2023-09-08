@@ -75,4 +75,19 @@ def get_data_by_name(name, data):
     # return none if no matches are found
     return None
 
-display_single_entry(get_data_by_name('bitcoin', json_data))
+# get currency information by its rank, can't use index as data may not be sorted for rank
+def get_data_by_rank(rank, data):
+
+    # loop through data entries
+    for entry in data:
+
+        # check to see if ranks match
+        if int(entry['rank']) == rank:
+            return entry
+    
+
+    # return none if rank not found
+    return None
+
+
+display_single_entry(get_data_by_rank(15, json_data))
