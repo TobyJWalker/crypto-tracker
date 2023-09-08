@@ -62,4 +62,17 @@ def get_data_by_symbol(symbol, data):
     # return none if no entries we're found
     return None
 
-display_single_entry(get_data_by_symbol('BTC', json_data))
+# get the information of a currency by its symbol as a dictionary
+def get_data_by_name(name, data):
+
+    # loop through the data entries
+    for entry in data:
+
+        # check to see if the entry's name matches the one specified
+        if entry['name'].lower() == name.lower():
+            return entry
+    
+    # return none if no matches are found
+    return None
+
+display_single_entry(get_data_by_name('bitcoin', json_data))
