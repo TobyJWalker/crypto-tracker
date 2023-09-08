@@ -52,42 +52,118 @@ def display_multiple_entries(entries):
 # get the information of a currency by its symbol as a dictionary
 def get_data_by_symbol(symbol, data):
 
-    # loop through data entries
-    for entry in data:
+    # validate the data type of symbol and handle accordingly
+    if type(symbol) == str:
 
-        # check if the entry's symbol matches the requested symbol
-        if entry['symbol'] == symbol:
-            return entry
+        # loop through data entries
+        for entry in data:
+
+            # check to see if symbols match
+            if entry['symbol'].lower() == symbol.lower():
+                return entry
         
-    # return none if no entries we're found
-    return None
+        # return None if symbol not found
+        return None
+            
+    elif type(symbol) == list:
 
-# get the information of a currency by its symbol as a dictionary
+        # turn all symbols lowercase for case-insensitivity
+        symbol = [c.lower() for c in symbol]
+
+        
+        # create a list of entries
+        entries = []
+
+        # loop through data entries
+        for entry in data:
+
+            # check to see if entry's symbol is requested 
+            if entry['symbol'].lower() in symbol:
+
+                # add to list of entries
+                entries.append(entry)
+        
+        return entries if entries != [] else None
+    
+    else:
+        # return none if symbol is incorrect data type
+        return None
+
+# get the information of a currency by its name
 def get_data_by_name(name, data):
 
-    # loop through the data entries
-    for entry in data:
+    # validate the data type of name and handle accordingly
+    if type(name) == str:
 
-        # check to see if the entry's name matches the one specified
-        if entry['name'].lower() == name.lower():
-            return entry
+        # loop through data entries
+        for entry in data:
+
+            # check to see if names match
+            if entry['name'] == name:
+                return entry
+        
+        # return None if name not found
+        return None
+            
+    elif type(name) == list:
+
+        # turn all names lowercase for case-insensitivity
+        name = [c.lower() for c in name]
+
+        
+        # create a list of entries
+        entries = []
+
+        # loop through data entries
+        for entry in data:
+
+            # check to see if entry's name is requested 
+            if entry['name'].lower() in name:
+
+                # add to list of entries
+                entries.append(entry)
+        
+        return entries if entries != [] else None
     
-    # return none if no matches are found
-    return None
+    else:
+        # return none if rank is incorrect data type
+        return None
 
 # get currency information by its rank, can't use index as data may not be sorted for rank
 def get_data_by_rank(rank, data):
 
-    # loop through data entries
-    for entry in data:
+    # validate the data type of rank and handle accordingly
+    if type(rank) == int:
 
-        # check to see if ranks match
-        if int(entry['rank']) == rank:
-            return entry
+        # loop through data entries
+        for entry in data:
+
+            # check to see if ranks match
+            if int(entry['rank']) == rank:
+                return entry
+        
+        # return None if rank not found
+        return None
+            
+    elif type(rank) == list:
+        
+        # create a list of entries
+        entries = []
+
+        # loop through data entries
+        for entry in data:
+
+            # check to see if entry's rank is requested 
+            if int(entry['rank']) in rank:
+
+                # add to list of entries
+                entries.append(entry)
+        
+        return entries if entries != [] else None
     
+    else:
+        # return none if rank is incorrect data type
+        return None
 
-    # return none if rank not found
-    return None
 
-
-display_single_entry(get_data_by_rank(15, json_data))
+display_multiple_entries(get_data_by_name(['bitcoin', 'ethereum', 'tether', 'dogecoin'], json_data))
