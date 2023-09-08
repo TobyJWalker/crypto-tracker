@@ -194,4 +194,5 @@ def sort_by(value, data, reverse=False):
               ''')
         return None
 
-display_multiple_entries(sort_by('changePercent24Hr', json_data, reverse=True)[:5])
+if __name__ == '__main__':
+    display_multiple_entries(sort_by('changePercent24Hr', json_data, reverse=True)[:5])
