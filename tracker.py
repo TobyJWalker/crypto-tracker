@@ -165,5 +165,33 @@ def get_data_by_rank(rank, data):
         # return none if rank is incorrect data type
         return None
 
+# sorting function which takes the value to sort by as a parameter
+def sort_by(value, data, reverse=False):
 
-display_multiple_entries(get_data_by_name(['bitcoin', 'ethereum', 'tether', 'dogecoin'], json_data))
+    # categorise the possible values into lists or strings
+    str_vals = ['id', 'symbol', 'name', 'explorer']
+    num_vals = ['rank', 'supply', 'maxSupply', 'marketCapUsd', 'volumeUsd24Hr', 'priceUsd', 'changePercent24Hr', 'vwap24Hr']
+
+    # try to sort by the provided value, catch error if value doesn't exist
+    if value in str_vals:
+        return list(sorted(data, key=lambda entry: entry[value], reverse=reverse))
+    elif value in num_vals:
+        return list(sorted(data, key=lambda entry: float(entry[value]), reverse=reverse))
+    else:
+        print('''Invalid value type. Options are:
+              id
+              rank
+              symbol
+              name
+              supply
+              maxSupply
+              marketCapUsd
+              volumeUsd24Hr
+              priceUsd
+              changePercent24Hr
+              vwap24Hr
+              explorer
+              ''')
+        return None
+
+display_multiple_entries(sort_by('changePercent24Hr', json_data, reverse=True)[:5])
