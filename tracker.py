@@ -39,6 +39,16 @@ def display_single_entry(entry):
     for (key, value) in entry.items():
         print(f'{key}: {value}')
 
+# displays a list of entries in a clear format
+def display_multiple_entries(entries):
+    
+    # loop through the list of entries
+    for entry in entries:
+
+        # display the entry in a clear format and add padding
+        display_single_entry(entry)
+        print('\n\n')
+
 # get the information of a currency by its symbol as a dictionary
 def get_data_by_symbol(symbol, data):
 
