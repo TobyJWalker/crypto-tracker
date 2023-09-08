@@ -30,6 +30,15 @@ def get_crypto_data():
     parsed_data = json.loads(response.text)
     return parsed_data['data']
 
+json_data = get_crypto_data()
+
+# display a single data entry provided
+def display_single_entry(entry):
+
+    # loop through each item and display
+    for (key, value) in entry.items():
+        print(f'{key}: {value}')
+
 # get the information of a currency by its symbol as a dictionary
 def get_data_by_symbol(symbol, data):
 
@@ -37,8 +46,10 @@ def get_data_by_symbol(symbol, data):
     for entry in data:
 
         # check if the entry's symbol matches the requested symbol
-        if entry['symbol'] == 'symbol':
+        if entry['symbol'] == symbol:
             return entry
         
     # return none if no entries we're found
     return None
+
+display_single_entry(get_data_by_symbol('BTC', json_data))
