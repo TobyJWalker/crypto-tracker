@@ -33,8 +33,12 @@ def get_crypto_data():
 # get the information of a currency by its symbol as a dictionary
 def get_data_by_symbol(symbol, data):
 
-    # loop through data and return the data entry which matches the requested symbol
+    # loop through data entries
     for entry in data:
+
+        # check if the entry's symbol matches the requested symbol
         if entry['symbol'] == 'symbol':
             return entry
+        
+    # return none if no entries we're found
     return None
