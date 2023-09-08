@@ -170,13 +170,15 @@ def sort_by(value, data, reverse=False):
 
     # categorise the possible values into lists or strings
     str_vals = ['id', 'symbol', 'name', 'explorer']
-    num_vals = ['rank', 'supply', 'maxSupply', 'marketCapUsd', 'volumeUsd24Hr', 'priceUsd', 'changePercent24Hr', 'vwap24Hr']
+    num_vals = ['rank', 'supply', 'marketCapUsd', 'volumeUsd24Hr', 'priceUsd', 'changePercent24Hr', 'vwap24Hr']
 
     # try to sort by the provided value, catch error if value doesn't exist
     if value in str_vals:
         return list(sorted(data, key=lambda entry: entry[value], reverse=reverse))
     elif value in num_vals:
         return list(sorted(data, key=lambda entry: float(entry[value]), reverse=reverse))
+    elif value == 'maxSupply':
+        return list(sorted(data, key=lambda entry: float(entry[value]) if entry[value] != None else 10**20, reverse=reverse))  
     else:
         print('''Invalid value type. Options are:
               id
@@ -184,7 +186,6 @@ def sort_by(value, data, reverse=False):
               symbol
               name
               supply
-              maxSupply
               marketCapUsd
               volumeUsd24Hr
               priceUsd
@@ -195,4 +196,4 @@ def sort_by(value, data, reverse=False):
         return None
 
 if __name__ == '__main__':
-    display_multiple_entries(sort_by('changePercent24Hr', json_data, reverse=True)[:5])
+    display_multiple_entries(sort_by('maxSupply', json_data, reverse=False)[:5])
